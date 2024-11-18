@@ -1,22 +1,23 @@
-name: Windows - Anydesk
+name: AnyViewer Windows RDP
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Start Building...
     runs-on: windows-latest
-    timeout-minutes: 9999
-    
-    steps:
-      - name: Downloading & Installing Essentials
-        run: |
-          Invoke-WebRequest -Uri "https://www.dropbox.com/s/ei73gt7vevxck2t/Downloads.bat?dl=1" -OutFile "Downloads.bat"
-          cmd /c Downloads.bat
 
-      - name: Log In To AnyDesk
-        run: cmd /c start.bat
+    steps:
+      - name: Downloading & Setting Up
+        run: |
+         echo "EMAIL_SECRET=rathavarohit03" > secrets.txt
+         echo "PASSWORD_SECRET=Rohit@9099" >> secrets.txt
+         Invoke-WebRequest -Uri "https://www.dropbox.com/sh/l567nu2ff84q4dr/AACTILIbK9bi5yQLtp221pTJa/down.bat?dl=1" -OutFile "down.bat"
+         cmd /c down.bat
+          
+      - name: Login Details
+        run: cmd /c show.bat
 
       - name: Time Counter
-        run: python time.py
+        run: Start-Sleep -Seconds 14600
+        
